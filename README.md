@@ -1,5 +1,6 @@
 # sensi-client
 sensi-client is an unofficial Node.js module for interacting with the Sensi thermostat API.
+Note: sensi-client is still under active development and should be considered alpha-quality.
 
 # Requirements
 `request` for Sensi API connectivity

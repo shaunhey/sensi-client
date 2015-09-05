@@ -1,6 +1,6 @@
 {
   "name": "sensi-client",
-  "version": "1.0.1",
+  "version": "0.0.1",
   "description": "Sensi thermostat client module for Node.js",
   "author": "Shaun Hey <shaun@shaunhey.com>",
   "main": "sensi-client.js",
