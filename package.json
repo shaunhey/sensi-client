@@ -10,5 +10,17 @@
   "dependencies": {
     "request": "^2.60.0",
     "tough-cookie": "^2.0.0"
-  }
+  },
+  "respository": {
+    "type": "git",
+    "url": "https://github.com/shaunhey/sensi-client"
+  },
+  "bugs": {
+    "url": "https://github.com/shaunhey/sensi-client/issues"
+  },
+  "keywords": [
+    "sensi",
+    "thermostat"
+  ],
+  "license": "MIT"  
 }
