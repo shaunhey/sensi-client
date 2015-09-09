@@ -4,10 +4,9 @@
   "description": "Sensi thermostat client module for Node.js",
   "author": "Shaun Hey <shaun@shaunhey.com>",
   "main": "sensi-client.js",
-  "scripts": {
-
-  },
+  "scripts": {},
   "dependencies": {
+    "merge": "^1.2.0",
     "request": "^2.60.0",
     "tough-cookie": "^2.0.0"
   },
@@ -22,5 +21,5 @@
     "sensi",
     "thermostat"
   ],
-  "license": "MIT"  
+  "license": "MIT"
 }
