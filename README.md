@@ -16,6 +16,9 @@ Note: sensi-client is still under active development and should be considered al
         pollingRetryCount: 5
     };
     
+
+    client = new SensiClient(options);
+
     client.on("online", function(data) {
         console.log("Thermostat is online");
         console.dir(data);
@@ -46,8 +49,8 @@ Note: sensi-client is still under active development and should be considered al
             process.exit(1);
         }
       
-        if (client.thermostats) {
-            client.subscribe(client.thermostats[0].ICD, function(err) {
+        if (client._thermostats) {
+            client.subscribe(client._thermostats[0].ICD, function(err) {
                 if (err) {
                     console.error(err);  
                     process.exit(2);
