@@ -463,11 +463,21 @@ SensiClient.prototype._processUpdateMessage = function(updateMessage) {
     
     if (updateMessage.hasOwnProperty("EnvironmentControls") &&
         self._status.hasOwnProperty("EnvironmentControls")) {
-               
+            
+            var isTemporaryHold = false;
+            
+            // Check to see if this is a temporary hold (i.e., not scheduled)
+            if (updateMessage.EnvironmentControls.hasOwnProperty("HoldMode")) {
+                
+                if (updateMessage.EnvironmentControls.HoldMode == "Temporary") {
+                    isTemporaryHold = true;
+                }
+            }
+            
             // Check to see if the Cooling Setpoint has changed
             if (updateMessage.EnvironmentControls.hasOwnProperty("CoolSetpoint") &&
                 self._status.EnvironmentControls.hasOwnProperty("CoolSetpoint")) {
-
+                
                 if (updateMessage.EnvironmentControls.CoolSetpoint.hasOwnProperty("F") &&
                     self._status.EnvironmentControls.CoolSetpoint.hasOwnProperty("F")) { 
                         
@@ -476,7 +486,8 @@ SensiClient.prototype._processUpdateMessage = function(updateMessage) {
                         
                         self.emit("coolSetpointChanged", {
                             oldSetpoint: self._status.EnvironmentControls.CoolSetpoint.F,
-                            newSetpoint: updateMessage.EnvironmentControls.CoolSetpoint.F
+                            newSetpoint: updateMessage.EnvironmentControls.CoolSetpoint.F,
+                            isTemporaryHold: isTemporaryHold
                         });
                     }
                 }
@@ -494,7 +505,8 @@ SensiClient.prototype._processUpdateMessage = function(updateMessage) {
                             
                         self.emit("heatSetpointChanged", {
                             oldSetpoint: self._status.EnvironmentControls.HeatSetpoint.F,
-                            newSetpoint: updateMessage.EnvironmentControls.HeatSetpoint.F
+                            newSetpoint: updateMessage.EnvironmentControls.HeatSetpoint.F,
+                            isTemporaryHold: isTemporaryHold
                         });   
                     }
                 }
