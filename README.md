@@ -16,9 +16,7 @@ Note: sensi-client is still under active development and should be considered al
         pollingRetryCount: 5
     };
     
-
     client = new SensiClient(options);
-
     client.on("online", function(data) {
         console.log("Thermostat is online");
         console.dir(data);
@@ -43,20 +41,32 @@ Note: sensi-client is still under active development and should be considered al
             setpointChange.newSetpoint);
     });
     
-    client.connect(function(err) {
+    client.on("heatSetpointChanged", function(setpointChange) {
+        console.log("Heat setpoint has changed from " +
+            setpointChange.oldSetpoint +
+            " to " +
+            setpointChange.newSetpoint);
+    });
+    
+    client.connect(function(err, thermostats) {
         if (err) {
+            console.error("Encountered an error during connect.");
             console.error(err);
             process.exit(1);
         }
-      
-        if (client._thermostats) {
-            client.subscribe(client._thermostats[0].ICD, function(err) {
-                if (err) {
-                    console.error(err);  
-                    process.exit(2);
-                }
-            });
+        
+        if (!thermostats) {
+            console.error("The Sensi API did not return any thermostats!");
+            process.exit(2);
         }
+      
+        client.subscribe(thermostats[0].ICD, function(err) {
+            if (err) {
+                console.error("Encountered an error while subscribing.");
+                console.error(err);  
+                process.exit(3);
+            }
+        });
     });
     
 # Todo
