@@ -1,7 +1,8 @@
 # sensi-client
 sensi-client is an unofficial Node.js module for interacting with the Sensi thermostat API.
 Note: sensi-client is still under active development and should be considered alpha-quality.
-Note: As of June 2017, sensi-client is being rewritten using ES7 async/await syntax.
+
+Note: as of June 4th, 2018, this module no longer works. Emerson has reworked their API to use an OAuth token and a websocket. There are currently no plans to update this module to support the new API.
 
 # Requirements
 `request` for Sensi API connectivity
